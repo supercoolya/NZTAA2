@@ -1,0 +1,14 @@
+<resources>
+    <string name="app_name">NZTA A2</string>
+    <string name="about_us">About US</string>
+    <string name="take_quiz">Take Quiz</string>
+    <string name="contact_us">Contact US</string>
+    <string name="welcome_to_nzta_driving_test">Welcome To NZTA Driving Test</string>
+    <string name="locate_us">Locate Us</string>
+    <string name="maps">maps</string>
+    <string name="locate">Locate</string>
+    <string name="auckland_institute_of_studies">Auckland Institute Of Studies</string>
+    <string name="title_activity_maps">MapsActivity</string>
+    <string name="get_direction">GET DIRECTION</string>
+    <string name="facebook">Facebok</string>
+</resources>

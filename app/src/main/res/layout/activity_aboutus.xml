@@ -1,0 +1,181 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Aboutus">
+
+    <Button
+        android:id="@+id/btndir"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:backgroundTint="#A400BCD4"
+        android:elevation="13dp"
+        android:text="@string/get_direction"
+        android:textColor="#37474F"
+        android:textStyle="bold"
+        app:icon="@android:drawable/ic_menu_directions"
+        app:iconTint="#F53F51B5"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.916" />
+
+    <TextView
+        android:id="@+id/aboutusTextView"
+        android:layout_width="174dp"
+        android:layout_height="40dp"
+        android:layout_margin="5dp"
+        android:layout_marginStart="5dp"
+        android:layout_marginBottom="5dp"
+        android:text="@string/about_us"
+        android:textAlignment="center"
+        android:textColor="@color/black"
+        android:textSize="30sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.487"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.083" />
+
+    <Button
+        android:id="@+id/btnBack2"
+        android:layout_width="51dp"
+        android:layout_height="48dp"
+        android:background="@drawable/roundedbutton"
+        android:backgroundTint="#2196F3"
+        app:icon="?attr/homeAsUpIndicator"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.044"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.02"
+        tools:ignore="SpeakableTextPresentCheck">
+
+    </Button>
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/aiscv"
+        android:layout_width="339dp"
+        android:layout_height="199dp"
+        android:layout_gravity="center"
+        android:clickable="true"
+        android:focusable="true"
+        android:foreground="?android:attr/selectableItemBackground"
+        app:cardCornerRadius="12dp"
+        app:cardElevation="15dp"
+        app:cardPreventCornerOverlap="true"
+        app:cardUseCompatPadding="false"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.298"
+        tools:ignore="MissingConstraints">
+
+        <RelativeLayout
+            android:layout_width="226dp"
+            android:layout_height="181dp"
+            android:layout_gravity="center">
+
+            <ImageView
+                android:id="@+id/aisIv"
+                android:layout_width="111dp"
+                android:layout_height="103dp"
+                android:layout_centerHorizontal="true"
+                android:contentDescription="@string/auckland_institute_of_studies"
+                android:src="@drawable/ais" />
+
+            <TextView
+                style="@style/SansBold"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/aisIv"
+                android:layout_marginTop="36dp"
+                android:gravity="center"
+                android:text="@string/auckland_institute_of_studies"
+                android:textColor="@color/black"
+                android:textSize="17sp" />
+
+        </RelativeLayout>
+
+    </androidx.cardview.widget.CardView>
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/findmecv"
+        android:layout_width="182dp"
+        android:layout_height="143dp"
+        android:layout_gravity="center"
+        android:clickable="true"
+        android:focusable="true"
+        android:foreground="?android:attr/selectableItemBackground"
+        app:cardCornerRadius="12dp"
+        app:cardElevation="15dp"
+        app:cardPreventCornerOverlap="true"
+        app:cardUseCompatPadding="false"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.497"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.729"
+        tools:ignore="MissingConstraints">
+
+        <ImageView
+            android:id="@+id/findmeIv"
+            android:layout_width="145dp"
+            android:layout_height="84dp"
+            android:layout_gravity="center"
+            android:contentDescription="@string/maps"
+
+
+            android:src="@drawable/locate" />
+
+        <TextView
+            android:id="@+id/findmeTextView"
+            style="@style/SansBold"
+            android:layout_width="162dp"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/findmeIv"
+            android:layout_gravity="bottom"
+            android:layout_marginStart="5dp"
+            android:layout_marginTop="5dp"
+            android:layout_marginBottom="5dp"
+            android:text="@string/locate_us"
+            android:textAlignment="center"
+            android:textSize="20sp"
+            android:textStyle="bold" />
+
+
+    </androidx.cardview.widget.CardView>
+
+    <ImageView
+        android:id="@+id/ivFb"
+        android:layout_width="72dp"
+        android:layout_height="55dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.079"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.914"
+        app:srcCompat="@drawable/fb" />
+
+    <ImageView
+        android:id="@+id/ivIg"
+        android:layout_width="72dp"
+        android:layout_height="55dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.924"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.913"
+        app:srcCompat="@drawable/is" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
