@@ -67,10 +67,10 @@ public class QuizActivity extends AppCompatActivity {
         while (true) {
             if (quizQuestionArrayList!=null&&quizQuestionArrayList.size()==35) {
                 editTextTimeCount.setText("30:00");
-                currentQuizNumberText.setText(String.valueOf(currentNumber++));
+                currentQuizNumberText.setText(String.valueOf(currentNumber));
                 editTextQuiz.setText(quizQuestionArrayList.get(currentIndex).getQuestion());
                 AnswerLists answerLists = new AnswerLists();
-                answerLists.execute(AppSettings.APP_URL_ADDRESS + "SearchAnswersByID.php?quizQuestionId="+quizQuestionArrayList.get(currentIndex++).getId());
+                answerLists.execute(AppSettings.APP_URL_ADDRESS + "SearchAnswersByID.php?quizQuestionId="+quizQuestionArrayList.get(currentIndex).getId());
                 try {
                     Thread.sleep(500);
                 } catch (InterruptedException e) {
@@ -91,7 +91,7 @@ public class QuizActivity extends AppCompatActivity {
         lButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(currentIndex>1){
+                if(currentIndex>=1){
                     currentQuizNumberText.setText(String.valueOf(--currentNumber));
                     editTextQuiz.setText(quizQuestionArrayList.get(--currentIndex).getQuestion());
                     AnswerLists answerLists = new AnswerLists();
@@ -117,9 +117,9 @@ public class QuizActivity extends AppCompatActivity {
         rButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(currentIndex<35){
-                    currentQuizNumberText.setText(String.valueOf(currentNumber++));
-                    editTextQuiz.setText(quizQuestionArrayList.get(currentIndex++).getQuestion());
+                if(currentNumber<35){
+                    currentQuizNumberText.setText(String.valueOf(++currentNumber));
+                    editTextQuiz.setText(quizQuestionArrayList.get(++currentIndex).getQuestion());
                     AnswerLists answerLists = new AnswerLists();
                     answerLists.execute(AppSettings.APP_URL_ADDRESS + "SearchAnswersByID.php?quizQuestionId="+quizQuestionArrayList.get(currentIndex).getId());
                     try {
