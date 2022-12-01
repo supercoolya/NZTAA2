@@ -37,7 +37,7 @@ public class Home extends AppCompatActivity implements View.OnClickListener {
         switch (v.getId()){
 
             case R.id.tqcv:
-                intent = new Intent(this,Quiz.class);
+                intent = new Intent(this, QuizActivity.class);
                 startActivity(intent);
                 break;
 
