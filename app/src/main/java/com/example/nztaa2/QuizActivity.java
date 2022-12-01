@@ -8,6 +8,7 @@ import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.nztaa2.Models.QuizAnswer;
 import com.example.nztaa2.Models.QuizQuestion;
 import com.example.nztaa2.Utils.AppSettings;
 import com.google.gson.Gson;
@@ -36,6 +37,9 @@ public class QuizActivity extends AppCompatActivity {
     private Button rButton;
     private Button endButton;
     private ArrayList<QuizQuestion> quizQuestionArrayList;
+    private ArrayList<QuizAnswer> quizAnswerArrayList;
+
+    private int currentNumber = 1;
 
 
 
@@ -60,7 +64,25 @@ public class QuizActivity extends AppCompatActivity {
 
         while (true) {
             if (quizQuestionArrayList!=null&&quizQuestionArrayList.size()==35) {
-                System.out.println(quizQuestionArrayList.size());
+                editTextTimeCount.setText("30:00");
+                currentQuizNumberText.setText(String.valueOf(currentNumber));
+                editTextQuiz.setText(quizQuestionArrayList.get(0).getQuestion());
+                AnswerLists answerLists = new AnswerLists();
+                answerLists.execute(AppSettings.APP_URL_ADDRESS + "SearchAnswersByID.php?quizQuestionId="+quizQuestionArrayList.get(0).getId());
+                try {
+                    Thread.sleep(500);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+                while (true){
+                    if (quizAnswerArrayList!=null&&quizAnswerArrayList.size()==4){
+                        editTextAnswerA.setText(quizAnswerArrayList.get(0).getAnswer());
+                        editTextAnswerB.setText(quizAnswerArrayList.get(1).getAnswer());
+                        editTextAnswerC.setText(quizAnswerArrayList.get(2).getAnswer());
+                        editTextAnswerD.setText(quizAnswerArrayList.get(3).getAnswer());
+                    }
+                    break;
+                }
                 break;
             }
         }
@@ -73,7 +95,6 @@ public class QuizActivity extends AppCompatActivity {
         @Override
         protected String doInBackground(String[] urlAddress) {
             quizQuestionArrayList = new ArrayList<>();
-            StringBuilder stringBuilder = null;
             try {
                 //step1: Create the obj of URL
                 URL url = new URL(urlAddress[0]);
@@ -82,18 +103,51 @@ public class QuizActivity extends AppCompatActivity {
                 //Step3 and 4: used for output stream
                 //step5: Use Input Stream to fetch the data
                 BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(connection.getInputStream()));
-                stringBuilder = new StringBuilder();
                 String line = null;
                 while((line = bufferedReader.readLine())!=null){
                     line = line.trim().substring(0,line.trim().length()-2)+"]";
-                    System.out.println(line.trim());
-
                     JSONArray jsonArray = new JSONArray(line);
                     Gson gson = new Gson();
                     for (int i = 0; i < jsonArray.length(); i++) {
                         // JSON数组里面的具体-JSON对象
                         JSONObject jsonObject = jsonArray.getJSONObject(i);
                         quizQuestionArrayList.add(gson.fromJson(jsonObject.toString(),QuizQuestion.class));
+                    }
+                    Log.d("Quizs fetched",line.toString());
+                }
+            } catch (MalformedURLException e) {
+                Log.d("Error found",e.getMessage().toString());
+            } catch (IOException e) {
+                Log.d("IOException found",e.getMessage().toString());
+            }catch(Exception e){
+                Log.d("Exception found",e.getMessage().toString());
+            }
+            return "";
+        }
+    }
+
+    class AnswerLists extends AsyncTask<String,String,String> {
+
+        @Override
+        protected String doInBackground(String[] urlAddress) {
+            quizAnswerArrayList = new ArrayList<>();
+            try {
+                //step1: Create the obj of URL
+                URL url = new URL(urlAddress[0]);
+                //step2: Open the connection
+                URLConnection connection = url.openConnection();
+                //Step3 and 4: used for output stream
+                //step5: Use Input Stream to fetch the data
+                BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(connection.getInputStream()));
+                String line = null;
+                while((line = bufferedReader.readLine())!=null){
+                    line = line.trim().substring(0,line.trim().length()-2)+"]";
+                    JSONArray jsonArray = new JSONArray(line);
+                    Gson gson = new Gson();
+                    for (int i = 0; i < jsonArray.length(); i++) {
+                        // JSON数组里面的具体-JSON对象
+                        JSONObject jsonObject = jsonArray.getJSONObject(i);
+                        quizAnswerArrayList.add(gson.fromJson(jsonObject.toString(),QuizAnswer.class));
                     }
                     Log.d("Quizs fetched",line.toString());
                 }

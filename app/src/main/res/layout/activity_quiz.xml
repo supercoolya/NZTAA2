@@ -8,11 +8,11 @@
 
     <EditText
         android:id="@+id/editTextQuiz"
-        android:layout_width="372dp"
-        android:layout_height="76dp"
+        android:layout_width="370dp"
+        android:layout_height="96dp"
         android:layout_marginTop="100dp"
-        android:focusable="false"
         android:ems="10"
+        android:focusable="false"
         android:gravity="start|top"
         android:inputType="textMultiLine"
         app:layout_constraintEnd_toEndOf="parent"
