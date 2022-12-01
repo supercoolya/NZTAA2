@@ -3,6 +3,7 @@ package com.example.nztaa2;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
@@ -40,6 +41,7 @@ public class QuizActivity extends AppCompatActivity {
     private ArrayList<QuizAnswer> quizAnswerArrayList;
 
     private int currentNumber = 1;
+    private int currentIndex = 0;
 
 
 
@@ -65,10 +67,10 @@ public class QuizActivity extends AppCompatActivity {
         while (true) {
             if (quizQuestionArrayList!=null&&quizQuestionArrayList.size()==35) {
                 editTextTimeCount.setText("30:00");
-                currentQuizNumberText.setText(String.valueOf(currentNumber));
-                editTextQuiz.setText(quizQuestionArrayList.get(0).getQuestion());
+                currentQuizNumberText.setText(String.valueOf(currentNumber++));
+                editTextQuiz.setText(quizQuestionArrayList.get(currentIndex).getQuestion());
                 AnswerLists answerLists = new AnswerLists();
-                answerLists.execute(AppSettings.APP_URL_ADDRESS + "SearchAnswersByID.php?quizQuestionId="+quizQuestionArrayList.get(0).getId());
+                answerLists.execute(AppSettings.APP_URL_ADDRESS + "SearchAnswersByID.php?quizQuestionId="+quizQuestionArrayList.get(currentIndex++).getId());
                 try {
                     Thread.sleep(500);
                 } catch (InterruptedException e) {
@@ -86,6 +88,57 @@ public class QuizActivity extends AppCompatActivity {
                 break;
             }
         }
+        lButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(currentIndex>1){
+                    currentQuizNumberText.setText(String.valueOf(--currentNumber));
+                    editTextQuiz.setText(quizQuestionArrayList.get(--currentIndex).getQuestion());
+                    AnswerLists answerLists = new AnswerLists();
+                    answerLists.execute(AppSettings.APP_URL_ADDRESS + "SearchAnswersByID.php?quizQuestionId="+quizQuestionArrayList.get(currentIndex).getId());
+                    try {
+                        Thread.sleep(500);
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
+                    while (true){
+                        if (quizAnswerArrayList!=null&&quizAnswerArrayList.size()==4){
+                            editTextAnswerA.setText(quizAnswerArrayList.get(0).getAnswer());
+                            editTextAnswerB.setText(quizAnswerArrayList.get(1).getAnswer());
+                            editTextAnswerC.setText(quizAnswerArrayList.get(2).getAnswer());
+                            editTextAnswerD.setText(quizAnswerArrayList.get(3).getAnswer());
+                        }
+                        break;
+                    }
+                }
+            }
+        });
+
+        rButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(currentIndex<35){
+                    currentQuizNumberText.setText(String.valueOf(currentNumber++));
+                    editTextQuiz.setText(quizQuestionArrayList.get(currentIndex++).getQuestion());
+                    AnswerLists answerLists = new AnswerLists();
+                    answerLists.execute(AppSettings.APP_URL_ADDRESS + "SearchAnswersByID.php?quizQuestionId="+quizQuestionArrayList.get(currentIndex).getId());
+                    try {
+                        Thread.sleep(500);
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
+                    while (true){
+                        if (quizAnswerArrayList!=null&&quizAnswerArrayList.size()==4){
+                            editTextAnswerA.setText(quizAnswerArrayList.get(0).getAnswer());
+                            editTextAnswerB.setText(quizAnswerArrayList.get(1).getAnswer());
+                            editTextAnswerC.setText(quizAnswerArrayList.get(2).getAnswer());
+                            editTextAnswerD.setText(quizAnswerArrayList.get(3).getAnswer());
+                        }
+                        break;
+                    }
+                }
+            }
+        });
 
 
     }
