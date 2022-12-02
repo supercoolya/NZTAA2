@@ -170,6 +170,7 @@ public class QuizActivity extends AppCompatActivity {
         protected String doInBackground(String[] urlAddress) {
             quizQuestionArrayList = new ArrayList<>();
             try {
+                System.out.println("");
                 //step1: Create the obj of URL
                 URL url = new URL(urlAddress[0]);
                 //step2: Open the connection
