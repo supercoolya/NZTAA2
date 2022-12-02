@@ -2,6 +2,7 @@ package com.example.nztaa2;
 
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.os.CountDownTimer;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -33,7 +34,7 @@ public class QuizActivity extends AppCompatActivity {
     private TextView editTextAnswerB;
     private TextView editTextAnswerC;
     private TextView editTextAnswerD;
-    private TextView editTextTimeCount;
+
     private Button lButton;
     private Button rButton;
     private Button endButton;
@@ -43,13 +44,33 @@ public class QuizActivity extends AppCompatActivity {
     private int currentNumber = 1;
     private int currentIndex = 0;
 
+    private TextView editTextTimeCount;
+    private CountDownTimer timer = new CountDownTimer(30*60*1000, 1000) {
 
+
+        @Override
+        public void onTick(long millisUntilFinished) {
+            editTextTimeCount.setText(getDate((int) (millisUntilFinished / 1000)));
+        }
+
+        @Override
+        public void onFinish() {
+
+        }
+    };
+
+    public static String getDate(Integer date ) {
+        int m = (date%3600)/60;
+        int s = (date%3600)%60;
+        return m+":"+s;
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_quiz);
 
+        timer.start();
         currentQuizNumberText = findViewById(R.id.currentQuizNumberText);
         editTextQuiz = findViewById(R.id.editTextQuiz);
         editTextAnswerA = findViewById(R.id.editTextAnswerA);
@@ -214,8 +235,4 @@ public class QuizActivity extends AppCompatActivity {
             return "";
         }
     }
-
-
-
-
 }
